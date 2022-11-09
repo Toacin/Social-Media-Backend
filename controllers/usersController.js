@@ -16,7 +16,7 @@ module.exports = {
     },
     async findUsers(req, res) {
         try{
-            let dbUserData = await Users.find();
+            let dbUserData = await Users.find().populate('thoughts').populate('friends');
             if (dbUserData) {
                 res.status(200).json(dbUserData);
             } else {
@@ -28,7 +28,7 @@ module.exports = {
     },
     async findOneUser(req, res) {
         try{
-            let dbUserData = await Users.findOne({_id: req.params.id});
+            let dbUserData = await Users.findOne({_id: req.params.id}).populate('thoughts').populate('friends');
             if (dbUserData) {
                 res.status(200).json(dbUserData);
             } else {
